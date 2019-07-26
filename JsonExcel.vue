@@ -206,7 +206,7 @@ export default {
       //Data
       data.map(function(item) {
         for (let key in item) {
-          let escapedCSV = '=\"' + item[key] + '\"'; // cast Numbers to string
+          let escapedCSV = item[key] + ""; // cast Numbers to string
           if (escapedCSV.match(/[,;"\n]/)) { // Escape both , and ; (common delimiters)
             escapedCSV = '"' + escapedCSV.replace(/\"/g, '""') + '"';
           }
