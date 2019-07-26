@@ -190,6 +190,7 @@ export default {
 		Transform json data into an CSV file.
 		*/
     jsonToCSV(data) {
+      var delimiter = ";";
       var csvData = [];
       //Header
       if (this.title != null) {
@@ -198,7 +199,7 @@ export default {
       //Fields
       for (let key in data[0]) {
         csvData.push(key);
-        csvData.push(",");
+        csvData.push(delimiter);
       }
       csvData.pop();
       csvData.push("\r\n");
@@ -206,11 +207,11 @@ export default {
       data.map(function(item) {
         for (let key in item) {
           let escapedCSV = '=\"' + item[key] + '\"'; // cast Numbers to string
-          if (escapedCSV.match(/[,"\n]/)) {
+          if (escapedCSV.match(/[,;"\n]/)) { // Escape both , and ; (common delimiters)
             escapedCSV = '"' + escapedCSV.replace(/\"/g, '""') + '"';
           }
           csvData.push(escapedCSV);
-          csvData.push(",");
+          csvData.push(delimiter);
         }
         csvData.pop();
         csvData.push("\r\n");
